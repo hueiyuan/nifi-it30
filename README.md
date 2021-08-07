@@ -1,7 +1,7 @@
 # Apache Nifi for IT 30 天鐵人賽
 
 ## Project 
-該 Repository 主要是用來存放 IT 30 天鐵人賽所會用到的 code。
+該 Repository 主要是用來存放 IT 30 天鐵人賽所會用到的 code。<br>
 詳情 link: https://github.com/
 
 ### Folder Structure
