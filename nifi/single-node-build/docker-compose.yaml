@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    nifi:
+        image: nifi-sample
+        container_name: nifi-service
+        restart: always
+        ports:
+            - 8443:8443/tcp
+            - 9090:8080/tcp
+        env_file: .env
+        environment:
+            - SINGLE_USER_CREDENTIALS_USERNAME=${NIFI_USERNAME}
+            - SINGLE_USER_CREDENTIALS_PASSWORD=${nifipassword}
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_REGION=${AWS_REGION}
+        networks:
+            - nifi-network
+
+    nifi-registry:
+        image: apache/nifi-registry:1.14.0
+        container_name: nifi-registry-service
+        restart: always
+        ports:
+            - 18080:18080/tcp
+        networks:
+            - nifi-network
+networks:
+    nifi-network:
