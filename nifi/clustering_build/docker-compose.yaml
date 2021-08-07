@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+    zookeeper:
+        image: zookeeper:3.5
+        container_name: zookeeper
+        hostname: zookeeper
+        restart: always
+        environment:
+            - ALLOW_ANONMOUS_LOGIN=yes
+        network:
+            - nifinet
+
+    nifi-node-1:
+        image: nifi-sample
+        container_name: nifi-node-1
+        restart: always
+        ports:
+            - 9443:8443/tcp
+            - 9091:8080/tcp
+        env_file: .env
+        environment:
+            - SINGLE_USER_CREDENTIALS_USERNAME=${NIFI_USERNAME}
+            - SINGLE_USER_CREDENTIALS_PASSWORD=${nifipassword}
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_REGION=${AWS_REGION}
+        networks:
+            - nifinet
+
+    nifi-node-2:
+        image: nifi-sample
+        container_name: nifi-node-2
+        restart: always
+        ports:
+            - 9444:8443/tcp
+            - 9092:8080/tcp
+        env_file: .env
+        environment:
+            - SINGLE_USER_CREDENTIALS_USERNAME=${NIFI_USERNAME}
+            - SINGLE_USER_CREDENTIALS_PASSWORD=${nifipassword}
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_REGION=${AWS_REGION}
+        networks:
+            - nifinet
+
+    nifi-node-3:
+        image: nifi-sample
+        container_name: nifi-node-3
+        restart: always
+        ports:
+            - 9445:8443/tcp
+            - 9093:8080/tcp
+        env_file: .env
+        environment:
+            - SINGLE_USER_CREDENTIALS_USERNAME=${NIFI_USERNAME}
+            - SINGLE_USER_CREDENTIALS_PASSWORD=${nifipassword}
+            - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+            - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+            - AWS_REGION=${AWS_REGION}
+        networks:
+            - nifinet
+
+    nifi-registry:
+        image: apache/nifi-registry:1.14.0
+        container_name: nifi-registry-service
+        restart: always
+        ports:
+            - 18080:18080/tcp
+        networks:
+            - nifinet
+networks:
+    nifinet:
+        driver: bridge
