@@ -9,6 +9,10 @@ services:
             - 8443:8443/tcp
             - 9090:8080/tcp
         env_file: .env
+        volumes:
+            - "./aws_athena_jdbc.jar:/tmp/aws_athena_jdbc.jar"
+            - "./aws_redshift_jdbc.jar:/tmp/aws_redshift_jdbc.jar"
+            - "./mysql-connector-java-8.0.26.jar:/tmp/mysql-connector-java-8.0.26.jar"
         environment:
             - SINGLE_USER_CREDENTIALS_USERNAME=${NIFI_USERNAME}
             - SINGLE_USER_CREDENTIALS_PASSWORD=${nifipassword}
