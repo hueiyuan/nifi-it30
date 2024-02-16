@@ -1,10 +1,6 @@
 name: My workflow
 
-on:
-  workflow_dispatch:
-  push:
-    branches-ignore:
-      - master
+on: workflow_dispatch
 
 jobs:
   build:
@@ -12,4 +8,4 @@ jobs:
 
     steps:
       - name: Get branch name
-        run: echo "Branch name: ${{ github.ref }}"
+        run: echo "Branch name: ${{ github.workflow.branch }}"
