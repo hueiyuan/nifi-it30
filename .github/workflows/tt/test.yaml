@@ -6,6 +6,10 @@ on:
     branches-ignore:
       - main
 
+defaults:
+  run:
+    working-directory: tt
+    
 jobs:
   build:
     runs-on: ubuntu-latest
