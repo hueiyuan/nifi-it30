@@ -1,11 +1,16 @@
 name: My workflow
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Get branch name
         run: echo "Branch name: ${{ github.workflow.branch }}"
