@@ -1,0 +1,15 @@
+name: My workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name
+        run: echo "Branch name: ${{ github.ref }}"
