@@ -12,4 +12,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Get branch name
-        run: echo ${{ github.ref_name }}
+        run: echo ${{ github.ref_name == 'main' && 'int' || github.ref_name }}
