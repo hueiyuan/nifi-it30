@@ -4,10 +4,6 @@ on:
   push:
     branches-ignore:
       - main
-
-defaults:
-  run:
-    working-directory: tt
     
 jobs:
   build:
